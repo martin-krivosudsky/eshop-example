@@ -1,0 +1,16 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/Eshop/.vs/Eshop
+/Eshop/Eshop.API/obj
+/Eshop/Eshop.Core/bin/Debug/netcoreapp3.1
+/Eshop/Eshop.Core/obj
+/Eshop/Eshop.DAL/obj
+/Eshop/Eshop.Database/bin/Debug/netcoreapp3.1
+/Eshop/Eshop.Database/obj
+/Eshop/Eshop.API/bin/Debug/netcoreapp3.1
+/Eshop/Eshop.DAL/bin/Debug/netcoreapp3.1
+/Eshop/Eshop.Services/obj
+/Eshop/Eshop.Services.Tests/obj
