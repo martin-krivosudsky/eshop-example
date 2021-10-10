@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 namespace Eshop.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -17,6 +19,7 @@ namespace Eshop.API.Controllers
         }
 
         [HttpGet]
+        [MapToApiVersion("1.0")]
         [Route("get-all")]
         public async Task<IActionResult> GetAll()
         {
@@ -26,6 +29,8 @@ namespace Eshop.API.Controllers
         }
 
         [HttpGet]
+        [MapToApiVersion("1.0")]
+        [MapToApiVersion("2.0")]
         [Route("get")]
         public async Task<IActionResult> Get([FromQuery] long productId)
         {
@@ -35,6 +40,8 @@ namespace Eshop.API.Controllers
         }
 
         [HttpPost]
+        [MapToApiVersion("1.0")]
+        [MapToApiVersion("2.0")]
         [Route("edit-description")]
         public async Task<IActionResult> EditDescription([FromForm] EditDescriptionDTO editDescriptionDTO)
         {

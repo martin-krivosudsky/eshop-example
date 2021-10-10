@@ -11,6 +11,7 @@ using Eshop.Core.Services;
 using Eshop.Services;
 using Eshop.DAL;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Eshop.API
 {
@@ -32,9 +33,21 @@ namespace Eshop.API
             services.AddScoped(typeof(IProductDAL), typeof(ProductDAL));
             services.AddScoped(typeof(IProductService), typeof(ProductService));
 
+            services.AddApiVersioning(options =>
+            {
+                options.DefaultApiVersion = new ApiVersion(2, 0);
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.ReportApiVersions = true;
+            });
+            services.AddVersionedApiExplorer(options =>
+            {
+                options.GroupNameFormat = "'v'VVV"; 
+                options.SubstituteApiVersionInUrl = true;
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Eshop API", Version = "v1" });
+                c.SwaggerDoc("v2", new OpenApiInfo { Title = "Eshop API", Version = "v2" });
             });
 
             services.AddControllers();
@@ -50,7 +63,12 @@ namespace Eshop.API
             }
 
             app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Eshop API v1"));
+            app.UseSwaggerUI(
+                options =>
+                {
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Eshop API v1");
+                    options.SwaggerEndpoint("/swagger/v2/swagger.json", "Eshop API v2");
+                });
 
             app.UseHttpsRedirection();
 
