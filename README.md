@@ -7,7 +7,8 @@ git clone git@github.com:martin-krivosudsky/eshop-example.git
 ```
 Build API
 ```
-cd eshop-example\Eshop\Eshop.API>
+cd eshop-example\Eshop\Eshop.API
+dotnet build
 ```
 Create Database (MSSQL DB should be accessible on localhost)
 ```
