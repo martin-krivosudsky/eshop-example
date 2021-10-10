@@ -14,3 +14,5 @@
 /Eshop/Eshop.DAL/bin/Debug/netcoreapp3.1
 /Eshop/Eshop.Services/obj
 /Eshop/Eshop.Services.Tests/obj
+/Eshop/Eshop.Services/bin/Debug/netcoreapp3.1
+/Eshop/Eshop.Services.Tests/bin/Debug/netcoreapp3.1
