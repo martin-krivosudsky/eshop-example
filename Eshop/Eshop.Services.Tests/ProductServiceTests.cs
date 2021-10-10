@@ -6,6 +6,7 @@ using Eshop.Core.Services;
 using Eshop.DAL;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -20,7 +21,7 @@ namespace Eshop.Services.Tests
         [SetUp]
         public void Setup()
         {
-            var options = new DbContextOptionsBuilder<EshopDbContext>().UseInMemoryDatabase("EshopDB").Options;
+            var options = new DbContextOptionsBuilder<EshopDbContext>().UseInMemoryDatabase("EshopDB" + Guid.NewGuid()).Options;
             _dbContext = new EshopDbContext(options);
 
             _productDAL = new ProductDAL(_dbContext);
@@ -82,6 +83,5 @@ namespace Eshop.Services.Tests
 
             Assert.AreEqual(newDescription, ret.Description);
         }
-
     }
 }
