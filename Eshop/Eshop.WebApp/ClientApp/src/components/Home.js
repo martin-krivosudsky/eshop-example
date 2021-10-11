@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import InfiniteScroll from 'react-infinite-scroll-component'
-import { ProductDetailComponent } from './ProductDetail'
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { ProductDetailComponent } from './ProductDetail';
 import axios from 'axios';
+import showToast from '../ToastMessage';
+import { ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 export class Home extends Component {
     static displayName = Home.name;
@@ -68,12 +72,23 @@ export class Home extends Component {
                     product={this.state.selectedProduct}
                     changeDescription={this.changeDescription}
                 />
+                <ToastContainer />
             </>
         );
     }
 
     async fetchData() {
-        const response = await fetch('https://localhost:5001/api/v2/product/get-all?skip=' + this.state.skip + '&take=' + this.state.take);
+        const response = await fetch('https://localhost:5001/api/v2/product/get-all?skip=' + this.state.skip + '&take=' + this.state.take)
+            .catch(function (error) {
+                showToast("Unable to fetch data");
+                return;
+            });
+        console.log(response);
+        if (!response.ok) {
+            showToast("Unable to fetch data");
+            return;
+        }
+
         const data = await response.json();
         const skipNext = this.state.skip + this.state.take;
         const newList = [...this.state.items, ...data];
@@ -81,7 +96,15 @@ export class Home extends Component {
     }
 
     async handleRowClick(productId) {
-        const response = await fetch('https://localhost:5001/api/v2/product/get?productId=' + productId);
+        const response = await fetch('https://localhost:5001/api/v2/product/get?productId=' + productId)
+            .catch(function (error) {
+                showToast("Unable to fetch data");
+                return;
+            });
+        if (!response.ok) {
+            showToast("Unable to fetch data");
+            return;
+        }
         const data = await response.json();
 
         this.setState({ isModalOpen: true, selectedProduct: data });
@@ -101,7 +124,7 @@ export class Home extends Component {
                 window.location.href = "/";
             })
             .catch(function (error) {
-                console.log(error);
+                showToast("Unable to edit description: " + error);
             });
 
         this.setState({ isModalOpen: false });
