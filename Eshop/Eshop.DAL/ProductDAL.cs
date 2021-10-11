@@ -3,6 +3,7 @@ using Eshop.Core.DAL;
 using Eshop.Core.Models.Database;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Eshop.DAL
@@ -34,7 +35,12 @@ namespace Eshop.DAL
 
         public async Task<IEnumerable<Product>> GetAll()
         {
-            return await _dbContext.Products.ToListAsync().ConfigureAwait(false);
+            return await _dbContext.Products.OrderBy(p => p.Name).ToListAsync().ConfigureAwait(false);
+        }
+
+        public async Task<IEnumerable<Product>> GetAll(int skip, int take)
+        {
+            return await _dbContext.Products.OrderBy(p => p.Name).Skip(skip).Take(take).ToListAsync().ConfigureAwait(false);
         }
     }
 }

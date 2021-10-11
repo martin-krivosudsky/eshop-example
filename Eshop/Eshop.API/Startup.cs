@@ -60,6 +60,12 @@ namespace Eshop.API
             {
                 app.UseDeveloperExceptionPage();
                 dbContext.TruncateTables().InitializeTestDatabase();
+
+                app.UseCors(builder => builder
+                   .WithOrigins("https://localhost:44308")
+                   .AllowAnyMethod()
+                   .AllowAnyHeader()
+                   .AllowCredentials());
             }
 
             app.UseSwagger();

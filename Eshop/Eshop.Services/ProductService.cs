@@ -31,5 +31,10 @@ namespace Eshop.Services
         {
             return await _productDAL.GetAll().ConfigureAwait(false);
         }
+
+        public async Task<IEnumerable<Product>> GetAll(int skip, int take)
+        {
+            return await _productDAL.GetAll(skip, take).ConfigureAwait(false);
+        }
     }
 }

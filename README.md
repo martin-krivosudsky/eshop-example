@@ -5,6 +5,10 @@ Clone repo
 ```
 git clone git@github.com:martin-krivosudsky/eshop-example.git
 ```
+Restore solution
+```
+dotnet restore eshop-example\Eshop\Eshop.sln
+```
 Build API
 ```
 cd eshop-example\Eshop\Eshop.API
@@ -18,7 +22,15 @@ Run API
 ```
 dotnet run
 ```
-Swagger API should be on http://localhost:5000/swagger/index.html
+Swagger API should be available on http://localhost:5000/swagger/index.html
+
+Run WebApp
+```
+cd ../Eshop.WebApp
+dotnet build
+dotnet run
+```
+WebApp should be available on https://localhost:44308/
 
 ### How to run unit tests:
 ```

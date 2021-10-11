@@ -29,6 +29,16 @@ namespace Eshop.API.Controllers
         }
 
         [HttpGet]
+        [MapToApiVersion("2.0")]
+        [Route("get-all")]
+        public async Task<IActionResult> GetAll([FromQuery] int skip, [FromQuery] int take)
+        {
+            var result = await _productService.GetAll(skip, take).ConfigureAwait(false);
+
+            return Ok(result);
+        }
+
+        [HttpGet]
         [MapToApiVersion("1.0")]
         [MapToApiVersion("2.0")]
         [Route("get")]

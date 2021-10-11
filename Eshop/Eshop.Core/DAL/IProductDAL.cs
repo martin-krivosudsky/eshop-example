@@ -9,5 +9,6 @@ namespace Eshop.Core.DAL
         Task<IEnumerable<Product>> GetAll();
         Task<Product> Get(long id);
         Task EditDescription(long productId, string newDescription);
+        Task<IEnumerable<Product>> GetAll(int skip, int take);
     }
 }

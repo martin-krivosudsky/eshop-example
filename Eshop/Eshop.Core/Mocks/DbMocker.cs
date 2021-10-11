@@ -1,5 +1,6 @@
 ﻿using Eshop.Core.Models.Database;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Eshop.Core.Mocks
 {
@@ -7,25 +8,16 @@ namespace Eshop.Core.Mocks
     {
         public static EshopDbContext InitializeTestDatabase(this EshopDbContext context)
         {
-            context.Products.Add(new Product
+            Random rnd = new Random();
+            for (int i = 1; i <= 200; i++)
             {
-                Name = "Product 1",
-                ImgUri = "",
-                Price = 550
-            });
-            context.Products.Add(new Product
-            {
-                Name = "Product 2",
-                ImgUri = "exampleUri",
-                Price = 1200
-            });
-            context.Products.Add(new Product
-            {
-                Name = "Product 3",
-                ImgUri = "",
-                Price = 75,
-                Description = "Optional description"
-            });
+                context.Products.Add(new Product
+                {
+                    Name = $"Product-{i}",
+                    ImgUri = "https://www.eppendorf.com/fileadmin/_processed_/4/5/csm_Shop_ICON_Final_28d0afae6a.jpg",
+                    Price = rnd.Next(10, 10000)
+                });
+            }
 
             context.SaveChanges();
 
