@@ -1,4 +1,8 @@
 ## eshop-example
+Simple web application to show products in infinit scrolling list.
+
+### Prerequisities:
+MSSQL running on localhost.
 
 ### How to run:
 Clone repo
@@ -14,7 +18,7 @@ Build API
 cd eshop-example\Eshop\Eshop.API
 dotnet build
 ```
-Create Database (MSSQL DB should be accessible on localhost)
+Create Database
 ```
 dotnet ef database update
 ```

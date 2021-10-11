@@ -12,10 +12,13 @@ using Eshop.Services;
 using Eshop.DAL;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
+using System.IO;
+using System;
 
 namespace Eshop.API
 {
-    public class Startup
+    internal class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -48,6 +51,10 @@ namespace Eshop.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Eshop API", Version = "v1" });
                 c.SwaggerDoc("v2", new OpenApiInfo { Title = "Eshop API", Version = "v2" });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
 
             services.AddControllers();

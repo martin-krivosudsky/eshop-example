@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Eshop.Services.Tests
@@ -82,6 +83,16 @@ namespace Eshop.Services.Tests
             Product ret = await _productService.Get(product.Id).ConfigureAwait(false);
 
             Assert.AreEqual(newDescription, ret.Description);
+        }
+
+        [Test]
+        public async Task MockDB_GetAllTake25_25ProductsReturned()
+        {
+            _dbContext.InitializeTestDatabase();
+            IEnumerable<Product> ret = await _productService.GetAll(15, 25).ConfigureAwait(false);
+
+            Assert.IsNotEmpty(ret);
+            Assert.AreEqual(25, ret.Count());
         }
     }
 }

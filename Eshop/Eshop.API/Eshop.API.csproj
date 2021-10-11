@@ -20,5 +20,7 @@
     <ProjectReference Include="..\Eshop.Services\Eshop.Services.csproj" />
   </ItemGroup>
 
-
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
 </Project>

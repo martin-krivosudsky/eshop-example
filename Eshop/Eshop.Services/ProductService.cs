@@ -1,6 +1,5 @@
 ﻿using Eshop.Core.DAL;
 using Eshop.Core.Models.Database;
-using Eshop.Core.Models.DTO;
 using Eshop.Core.Services;
 using System;
 using System.Collections.Generic;
